@@ -1,21 +1,21 @@
-import bgCloudyDay from '../assets/bg_cloudy_day.png';
-import bgCloudyNight from '../assets/bg_cloudy_night.png';
-import iconCloudyDay from '../assets/cloudy_day.svg';
-import iconCloudyNight from '../assets/cloudy_night.svg';
+import bgCloudyDay from "../assets/bg_cloudy_day.png"
+import bgCloudyNight from "../assets/bg_cloudy_night.png"
+import iconCloudyDay from "../assets/cloudy_day.svg"
+import iconCloudyNight from "../assets/cloudy_night.svg"
 
-import iconRainDay from '../assets/rain_moment_day.svg';
-import bgRainDay from '../assets/bg_rain_day.png';
-import bgRainNight from '../assets/bg_rain_night.png';
+import bgRainDay from "../assets/bg_rain_day.png"
+import bgRainNight from "../assets/bg_rain_night.png"
+import iconRainDay from "../assets/rain_moment_day.svg"
 
-import iconClearDay from '../assets/clear_day.svg';
-import iconClearNight from '../assets/clear_night.svg';
-import bgClearDay from '../assets/bg_clear_day.png';
-import bgClearNight from '../assets/bg_clear_night.png';
+import bgClearDay from "../assets/bg_clear_day.png"
+import bgClearNight from "../assets/bg_clear_night.png"
+import iconClearDay from "../assets/clear_day.svg"
+import iconClearNight from "../assets/clear_night.svg"
 
-import iconSnowDay from '../assets/snow_day.svg';
-import iconSnowNight from '../assets/snow_night.svg';
-import bgSnowDay from '../assets/bg_snow_day.png';
-import bgSnowNight from '../assets/bg_snow_night.png';
+import bgSnowDay from "../assets/bg_snow_day.png"
+import bgSnowNight from "../assets/bg_snow_night.png"
+import iconSnowDay from "../assets/snow_day.svg"
+import iconSnowNight from "../assets/snow_night.svg"
 
 export const weatherIcons = {
   Clouds: {
@@ -48,4 +48,4 @@ export const weatherIcons = {
   },
 }
 
-export type WeatherIconsKeysProps = keyof typeof weatherIcons;
+export type WeatherIconsKeysProps = keyof typeof weatherIcons

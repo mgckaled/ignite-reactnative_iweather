@@ -5,6 +5,6 @@ export const api = axios.create({
   params: {
     lang: 'pt_br',
     units: 'metric',
-    appid: process.env.EXPO_PUBLIC_WEATHER_APP_ID,
+    appid: String(process.env.EXPO_PUBLIC_WEATHER_APP_ID),
   }
 });
