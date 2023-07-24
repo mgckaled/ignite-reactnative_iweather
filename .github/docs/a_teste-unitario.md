@@ -20,7 +20,7 @@ O teste unitário testa as unidades ou funcionalides da aplicação isoladamente
 - Evite aninhar demais os `describe()` para manter a legibilidade
 - Mantenha os testes independentesp
 - Mantenha os testes pequenos e rápidos para feedback rápido
-- Use `<name>.test.ts` para nomeação dos arquivos de teste 
+- Use `<name>.test.ts` para nomeação dos arquivos de teste
 
 ## JEST
 
