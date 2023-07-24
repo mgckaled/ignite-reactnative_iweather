@@ -1,4 +1,4 @@
-import { getNextDays } from "./getNextDays";
+import { getNextDays } from "../getNextDays";
 
 test("should be return the next five days", () => {
   const days = getNextDays()
