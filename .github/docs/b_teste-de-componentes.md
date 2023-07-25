@@ -105,7 +105,7 @@ O `screen` é exportado do pacote `@testing-library/react-native` e contém as m
 
 1. `screen.getByTestId`: Seleciona elementos com base em seus atributos `testID`. É usado para encontrar elementos específicos na interface do usuário durante o teste.
 
-2. `screen.getByText`: Seleciona elementos com base em seu conteúdo de texto. É útil quando você precisa encontrar elementos com um texto específico renderizado.
+2. `screen.getByText`: Seleciona elementos com base em seu conteúdo de texto. É útil quando você precisa encontrar elementos com um texto específico renderizado. Admite _regex_
 
 3. `screen.getByType`: Seleciona elementos com base em seu tipo de componente (por exemplo, Text, View, TouchableOpacity, etc.). É útil quando você deseja testar a presença ou a estrutura de certos tipos de elementos.
 

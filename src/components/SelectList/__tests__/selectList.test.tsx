@@ -1,23 +1,27 @@
-import { render, screen } from "@testing-library/react-native"
+import { render, screen, fireEvent } from "@testing-library/react-native"
 
 import { SelectList } from "@components/SelectList"
 
 describe("Component: SelectList", () => {
-  it("should be return selected details", () => {
+  it("should be return city details selected", () => {
     const data = [
       { id: "1", name: "Campinas", latitude: 123, longitude: 456 },
       { id: "2", name: "Campo Grande", latitude: 789, longitude: 987 },
     ]
-    const { debug } = render(
+
+    const onPress = jest.fn()
+
+    render(
       <SelectList
         data={data}
-        onPress={() => {}}
         onChange={() => {}}
+        onPress={() => {onPress}}
       />
     )
-    debug()
 
-    const selectdCity = screen.getByText("Campinas")
-    console.log(selectdCity)
+    const selectedCity = screen.getByText(/campo/i)
+    fireEvent.press(selectedCity)
+
+    expect(onPress).toBeCalledTimes(1)
   })
 })
