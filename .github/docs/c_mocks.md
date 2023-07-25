@@ -28,6 +28,8 @@ Embora os mocks sejam úteis em muitos casos, é importante lembrar que eles dev
 
 ## JEST
 
+### Função `fn()`
+
 O `jest.fn()` é uma função fornecida pelo framework de testes JavaScript chamado Jest. Sua função principal é criar uma função simulada, também conhecida como "função espiã" ou "spy function", que pode ser usada para rastrear chamadas, argumentos e retornos dessa função durante a execução dos testes.
 
 Aqui estão algumas das principais funcionalidades e usos do `jest.fn()`:
@@ -112,6 +114,67 @@ console.log(mockFunc.mock.calls); // Saída: [[], [], [], []]
 No exemplo acima, criamos uma função simulada chamada `mockFunc`. Definimos diferentes retornos simulados para cada chamada usando `mockReturnValueOnce()`. Depois disso, especificamos o valor de retorno padrão para qualquer chamada subsequente usando `mockReturnValue()`. O resultado é que a função simulada retornará valores diferentes dependendo de quantas vezes foi chamada.
 
 O `jest.fn()` é uma ferramenta poderosa para simular e verificar o comportamento de funções em testes, permitindo que você isole partes do código para verificar sua funcionalidade de forma controlada e previsível.
+
+### Função `expect().toBeCalledWith()`
+
+é usada para verificar se uma função mock (simulada) foi chamada com argumentos específicos durante um teste.
+
+Quando você está testando uma função que chama outras funções como parte do seu comportamento, é comum usar mocks para substituir essas funções e garantir que elas foram chamadas corretamente com os argumentos esperados.
+
+Aqui está como a função `expect().toBeCalledWith()` funciona:
+
+1. `expect`: Esta parte inicia a asserção para verificar se algo aconteceu corretamente durante o teste.
+
+2. `()` : As chamadas de função mock são colocadas dentro dos parênteses.
+
+3. `toBeCalledWith()`: Esta é a função de correspondência que especifica o que você espera que a função mock tenha sido chamada. Ela aceita os argumentos esperados que você quer verificar.
+
+Exemplo de uso:
+
+Suponha que você tenha a seguinte função que você deseja testar:
+
+```js
+// mathFunctions.js
+
+function add(a, b) {
+  return a + b;
+}
+```
+
+E você está testando a função abaixo que usa a função `add()`:
+
+```js
+// calculator.js
+
+const mathFunctions = require('./mathFunctions');
+
+function calculator(a, b) {
+  return mathFunctions.add(a, b);
+}
+```
+
+Agora, em seus testes usando Jest, você pode fazer o seguinte:
+
+```js
+// calculator.test.js
+
+const mathFunctions = require('./mathFunctions');
+const calculator = require('./calculator');
+
+// Mock a função add para evitar chamadas reais durante o teste
+jest.mock('./mathFunctions');
+
+test('calculator function calls add with correct arguments', () => {
+  calculator(2, 3);
+
+  // Verificar se a função add foi chamada com os argumentos corretos
+  expect(mathFunctions.add).toBeCalledWith(2, 3);
+});
+```
+
+Neste exemplo, a função `calculator(2, 3)` é chamada, e o teste verifica se a função `add()` dentro do módulo `mathFunctions` foi chamada exatamente com os argumentos `2` e `3`. Se a função `add()` não for chamada ou for chamada com argumentos diferentes, o teste falhará.
+
+Essa é uma das muitas funções úteis fornecidas pelo Jest para facilitar a escrita de testes em JavaScript e verificar o comportamento do seu código de forma confiável.
 
 ## React Native Testing Library
 

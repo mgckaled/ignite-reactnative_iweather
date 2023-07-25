@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react-native"
+import { fireEvent, render, screen } from "@testing-library/react-native"
 
 import { SelectList } from "@components/SelectList"
 
@@ -15,13 +15,13 @@ describe("Component: SelectList", () => {
       <SelectList
         data={data}
         onChange={() => {}}
-        onPress={() => {onPress}}
+        onPress={onPress}
       />
     )
 
     const selectedCity = screen.getByText(/campo/i)
     fireEvent.press(selectedCity)
 
-    expect(onPress).toBeCalledTimes(1)
+    expect(onPress).toBeCalledWith(data[1])
   })
 })
