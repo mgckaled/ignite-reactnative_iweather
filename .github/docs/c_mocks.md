@@ -176,6 +176,108 @@ Neste exemplo, a função `calculator(2, 3)` é chamada, e o teste verifica se a
 
 Essa é uma das muitas funções úteis fornecidas pelo Jest para facilitar a escrita de testes em JavaScript e verificar o comportamento do seu código de forma confiável.
 
+### Função `jest.spyOn()`
+
+É utilizada nos testes automatizados para criar "espiões" (ou "espies") em funções ou métodos específicos de objetos. Esses espiões permitem rastrear chamadas, acessos e comportamentos dessas funções durante a execução dos testes.
+
+Quando você utiliza o `jest.spyOn()`, você pode substituir temporariamente a implementação original de uma função por uma simulação ou por um mock (simulação controlada) para observar o seu comportamento. Isso é especialmente útil quando você deseja verificar se uma função foi chamada com os argumentos corretos, quantas vezes foi chamada ou até mesmo substituir o seu retorno para fins de teste.
+
+Aqui está um exemplo simples de como o `jest.spyOn()` pode ser usado:
+
+Suponhamos que temos o seguinte módulo em um arquivo chamado `calculator.js`:
+
+```javascript
+// calculator.js
+const Calculator = {
+  add: (a, b) => a + b,
+};
+export default Calculator;
+```
+
+Em um teste utilizando o Jest, podemos criar um espião para a função `add` do objeto `Calculator` da seguinte forma:
+
+```javascript
+import Calculator from './calculator';
+
+test('Testando função add', () => {
+  const spyAdd = jest.spyOn(Calculator, 'add');
+  const result = Calculator.add(2, 3);
+
+  expect(spyAdd).toHaveBeenCalled();
+  expect(spyAdd).toHaveBeenCalledWith(2, 3);
+  expect(result).toBe(5);
+
+  // Restaurar a função original após o teste.
+  spyAdd.mockRestore();
+});
+```
+
+Neste exemplo, o `jest.spyOn()` cria um espião para a função `add` do objeto `Calculator`. Isso nos permite verificar se a função foi chamada e se foi chamada com os argumentos corretos. Após o teste, é importante restaurar a função original usando `spyAdd.mockRestore()` para que outros testes não sejam afetados.
+
+Em resumo, o `jest.spyOn()` é uma ferramenta poderosa para testar comportamentos de funções e métodos em testes automatizados, possibilitando a observação e verificação de como essas funções são utilizadas em um contexto controlado.
+
+### Função `mockResolvedValue()`
+
+Em testes com Jest, o `mockResolvedValue()` é uma função utilizada para simular o comportamento de uma função assíncrona que retorna uma Promise, substituindo sua implementação original por uma resolução de Promise controlada.
+
+Quando trabalhamos com funções assíncronas que retornam Promises, é comum usar o `mockResolvedValue()` para criar um mock (simulação) que permite definir o valor retornado pela Promise durante os testes. Isso é especialmente útil quando queremos testar como nosso código reage a diferentes cenários, garantindo que ele funcione corretamente mesmo quando a função assíncrona retorna resultados específicos.
+
+Vamos ver um exemplo para entender melhor:
+
+Suponha que temos um módulo chamado `api.js`, que possui uma função assíncrona que faz uma requisição HTTP para uma API externa e retorna uma Promise com os dados:
+
+```javascript
+// api.js
+import axios from 'axios';
+
+const fetchDataFromAPI = async () => {
+  const response = await axios.get('https://example-api.com/data');
+  return response.data;
+};
+
+export default fetchDataFromAPI;
+```
+
+Agora, queremos testar um módulo chamado `dataProcessor.js`, que utiliza a função `fetchDataFromAPI()` para processar os dados e retornar um resultado específico. Vamos criar um teste para isso usando o `mockResolvedValue()`:
+
+```javascript
+// dataProcessor.js
+import fetchDataFromAPI from './api';
+
+const processAndFormatData = async () => {
+  const data = await fetchDataFromAPI();
+  // Processamento e formatação dos dados...
+  return processedData;
+};
+
+export default processAndFormatData;
+```
+
+Aqui está o teste usando o Jest e o `mockResolvedValue()`:
+
+```javascript
+import processAndFormatData from './dataProcessor';
+import fetchDataFromAPI from './api';
+
+jest.mock('./api'); // Mockando o módulo 'api.js'
+
+test('Testando processamento de dados', async () => {
+  // Definindo o valor que a função fetchDataFromAPI deve retornar (aqui usamos um valor fictício para o teste)
+  fetchDataFromAPI.mockResolvedValue({ id: 1, name: 'Produto A', price: 10 });
+
+  const result = await processAndFormatData();
+
+  // Realize os testes adequados no resultado esperado após o processamento...
+
+  // Restaurar a implementação original após o teste.
+  fetchDataFromAPI.mockRestore();
+});
+```
+
+No exemplo acima, usamos `fetchDataFromAPI.mockResolvedValue({ id: 1, name: 'Produto A', price: 10 })` para definir que, quando a função `fetchDataFromAPI()` for chamada, ela deve retornar a Promise resolvida com os dados especificados (o objeto `{ id: 1, name: 'Produto A', price: 10 }`).
+
+Assim, podemos controlar o comportamento da função assíncrona `fetchDataFromAPI` durante o teste, garantindo que nosso módulo `dataProcessor.js` seja testado de forma isolada e consistente, independentemente da resposta real da API externa.
+
 ## React Native Testing Library
 
 ### Função `fireEvent()`
