@@ -1,6 +1,6 @@
 import { api } from "../api"
 
-import { mockCityAPIResponse } from "@__tests__/mocks/mockCityAPIResponse"
+import { mockCityAPIResponse } from "@__tests__/mocks/api/mockCityAPIResponse"
 import { getCityByNameService } from "@services/getCityByNameService"
 
 describe("Service: getCityByNameService", () => {
