@@ -4,7 +4,7 @@ import { Day } from "@components/Day"
 
 import clearDay from "@assets/clear_day.svg"
 
-describe("Component", () => {
+describe("Component: Day", () => {
   it("should be render day", () => {
     render(
       <Day
